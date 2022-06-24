@@ -46,7 +46,7 @@ const App = () => {
   const [boards, setBoards] = useState(initialTask);
   const [newTask, setNewTask] = useState("");
 
-
+  // Function to add card in first board
   const addCard = () => {
     if (newTask === "") {
       alert("Please enter task!!!")
@@ -65,6 +65,7 @@ const App = () => {
     }
   };
 
+  // Function to remove card from particular board
   const removeCard = (bid, cid) => {
     const tempBoards = [...boards];
     const cardIndex = tempBoards[bid].cards.findIndex((item) => item.id === cid);
@@ -74,6 +75,7 @@ const App = () => {
     setBoards(tempBoards);
   };
 
+  // Function to move card to next board
   const goForward = (bid, cid) => {
     const board_id = bid + 1;
 
@@ -96,6 +98,7 @@ const App = () => {
     }
   }
 
+  // Function to move card to previous board
   const goBackward = (bid, cid) => {
     const board_id = bid - 1;
 

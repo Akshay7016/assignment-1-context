@@ -5,9 +5,10 @@ import { TodoContext } from "../../context/TodoContext";
 
 const Card = ({ card, boardId }) => {
 
+  // We got Provider's data using useContext hook and after that destructured it
   const { removeCard, goForward, goBackward } = useContext(TodoContext);
 
-  // Card id using destructuring of object
+  // Card id and Card name using destructuring of object "card"
   const { id, name } = card;
 
   return (
