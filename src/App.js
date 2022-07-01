@@ -48,38 +48,34 @@ const App = () => {
 
   // Function to add card in first board
   const addCard = () => {
-    if (newTask === "") {
-      alert("Please enter task!!!")
-    }
-    else {
+    if (newTask) {
       const tempBoards = [...boards];
-
-      tempBoards[0].cards.push({
+      tempBoards[0].cards = [...tempBoards[0].cards, {
         id: v4(),
         name: newTask,
         stage: 0
-      });
+      }]
 
       setBoards(tempBoards);
       setNewTask("")
+    }
+    else {
+      console.log("Please enter task!!!")
     }
   };
 
   // Function to remove card from particular board
   const removeCard = (bid, cid) => {
     const tempBoards = [...boards];
-    const cardIndex = tempBoards[bid].cards.findIndex((item) => item.id === cid);
-
-    // To remove card
-    tempBoards[bid].cards.splice(cardIndex, 1);
-    setBoards(tempBoards);
+    tempBoards[bid].cards = tempBoards[bid].cards.filter((item) => item.id !== cid);
+    setBoards(tempBoards)
   };
 
   // Function to move card to next board
   const goForward = (bid, cid) => {
-    const board_id = bid + 1;
+    const next_board_id = bid + 1;
 
-    if (board_id <= 3) {
+    if (next_board_id <= 3) {
       const tempBoards = [...boards];
       const cardIndex = tempBoards[bid].cards.findIndex((item) => item.id === cid);
 
@@ -90,7 +86,7 @@ const App = () => {
       tempBoards[bid].cards.splice(cardIndex, 1);
 
       // Adding card to next board (i.e board + 1)
-      tempBoards[board_id].cards.push(removed_card);
+      tempBoards[next_board_id].cards.push(removed_card);
       setBoards(tempBoards);
     }
     else {
@@ -100,9 +96,9 @@ const App = () => {
 
   // Function to move card to previous board
   const goBackward = (bid, cid) => {
-    const board_id = bid - 1;
+    const prev_board_id = bid - 1;
 
-    if (board_id >= 0) {
+    if (prev_board_id >= 0) {
       const tempBoards = [...boards];
       const cardIndex = tempBoards[bid].cards.findIndex((item) => item.id === cid);
 
@@ -113,7 +109,7 @@ const App = () => {
       tempBoards[bid].cards.splice(cardIndex, 1);
 
       // Adding card to next board (i.e board + 1)
-      tempBoards[board_id].cards.push(removed_card);
+      tempBoards[prev_board_id].cards.push(removed_card);
       setBoards(tempBoards);
 
     }
@@ -132,8 +128,20 @@ const App = () => {
         </div>
 
         <div className="app_title">
-          <input type="text" value={newTask} onChange={(event) => setNewTask(event.target.value)} placeholder="Enter New Task"></input>
-          <button type="submit" className="btn btn-primary ml-2" onClick={addCard}>Add Task</button>
+          <input
+            type="text"
+            value={newTask}
+            onChange={(event) => setNewTask(event.target.value)}
+            placeholder="Enter New Task"
+            required>
+          </input>
+
+          <button
+            type="submit"
+            className="btn btn-primary ml-2"
+            onClick={addCard}>
+            Add Task
+          </button>
         </div>
 
         <div className='app_boards_container'>
