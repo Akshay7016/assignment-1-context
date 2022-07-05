@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { ArrowLeftCircle, ArrowRightCircle, Trash2 } from "react-feather";
-import "./Card.css";
+
 import { TodoContext } from "../../context/TodoContext";
+import "./Card.css";
 
 const Card = ({ card, boardId }) => {
 

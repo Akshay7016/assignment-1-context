@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import './App.css';
-import Board from './components/Board/Board';
 import { v4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Board from './components/Board/Board';
 import { TodoContext } from './context/TodoContext';
+import './App.css';
 
 const initialTask = [
   {
@@ -11,12 +14,12 @@ const initialTask = [
     cards: [
       {
         id: v4(),
-        name: "Card 1",
+        name: "Task 1",
         stage: 0
       },
       {
         id: v4(),
-        name: "Card 2",
+        name: "Task 2",
         stage: 0
       }
     ]
@@ -46,6 +49,10 @@ const App = () => {
   const [boards, setBoards] = useState(initialTask);
   const [newTask, setNewTask] = useState("");
 
+  const changeHandler = (event) => {
+    setNewTask(event.target.value)
+  }
+
   // Function to add card in first board
   const addCard = () => {
     if (newTask) {
@@ -60,7 +67,15 @@ const App = () => {
       setNewTask("")
     }
     else {
-      console.log("Please enter task!!!")
+      toast.error("Please enter task!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     }
   };
 
@@ -121,42 +136,46 @@ const App = () => {
 
 
   return (
-    <TodoContext.Provider value={{ removeCard, goForward, goBackward }}>
-      <div className='app'>
-        <div className='app_navbar bg-info'>
-          <h2>Todo</h2>
-        </div>
+    <>
+      <TodoContext.Provider value={{ removeCard, goForward, goBackward }}>
+        <div className='app'>
+          <div className='app_navbar bg-info'>
+            <h2>Kanban</h2>
+          </div>
 
-        <div className="app_title">
-          <input
-            type="text"
-            value={newTask}
-            onChange={(event) => setNewTask(event.target.value)}
-            placeholder="Enter New Task"
-            required>
-          </input>
+          <div className="app_title">
+            <input
+              type="text"
+              value={newTask}
+              onChange={changeHandler}
+              placeholder="Enter New Task"
+              required>
+            </input>
 
-          <button
-            type="submit"
-            className="btn btn-primary ml-2"
-            onClick={addCard}>
-            Add Task
-          </button>
-        </div>
+            <button
+              type="submit"
+              className="btn btn-primary ml-2"
+              onClick={addCard}>
+              Add Task
+            </button>
+          </div>
 
-        <div className='app_boards_container'>
-          <div className='app_boards'>
-            {
-              boards.map((item) => (
-                <Board key={item.id}
-                  board={item}
-                />
-              ))
-            }
+          <div className='app_boards_container'>
+            <div className='app_boards'>
+              {
+                boards.map((item) => (
+                  <Board key={item.id}
+                    board={item}
+                  />
+                ))
+              }
+            </div>
           </div>
         </div>
-      </div>
-    </TodoContext.Provider>
+      </TodoContext.Provider>
+
+      <ToastContainer />
+    </>
   );
 }
 
