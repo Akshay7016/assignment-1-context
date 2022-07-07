@@ -22,14 +22,6 @@
   line-height: 1.875rem;
 }
 
-.first_board0 {
-  opacity: 0.1;
-}
-
-.last_board3 {
-  opacity: 0.1;
-}
-
 .card-buttons {
   height: 30px;
 }
@@ -43,4 +35,12 @@
   float: left;
   padding: 0 5px;
   cursor: pointer;
+}
+
+.first_board0 {
+  opacity: 0.1;
+}
+
+.last_board3 {
+  opacity: 0.1;
 }
