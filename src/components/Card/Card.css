@@ -22,22 +22,25 @@
   line-height: 1.875rem;
 }
 
-.card_footer {
-  display: flex;
-  margin-left: 140px;
-  margin-top: 20px;
-  align-items: center;
-}
-
-.card_footer p {
-  cursor: pointer;
-  margin: 0px 5px;
-}
-
 .first_board0 {
   opacity: 0.1;
 }
 
 .last_board3 {
   opacity: 0.1;
+}
+
+.card-buttons {
+  height: 30px;
+}
+
+.button-list {
+  list-style-type: none;
+  float: right;
+}
+
+.button-list li {
+  float: left;
+  padding: 0 5px;
+  cursor: pointer;
 }

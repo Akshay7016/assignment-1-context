@@ -17,10 +17,13 @@ const Card = ({ card, boardId }) => {
     <div className="card" >
       <div className="card_title">{name}</div>
 
-      <div className="card_footer">
-        <p className={`first_board${boardId}`} onClick={() => goBackward(boardId, id)}>{<ArrowLeftCircle />}</p>
-        <p className={`last_board${boardId}`} onClick={() => goForward(boardId, id)}>{<ArrowRightCircle />}</p>
-        <p onClick={() => removeCard(boardId, id)}>{<Trash2 />}</p>
+      {/* Cards button */}
+      <div className="card-buttons">
+        <ul className="button-list">
+          <li className={`first_board${boardId}`} onClick={() => goBackward(boardId, id)}>{<ArrowLeftCircle />}</li>
+          <li className={`last_board${boardId}`} onClick={() => goForward(boardId, id)}>{<ArrowRightCircle />}</li>
+          <li onClick={() => removeCard(boardId, id)}>{<Trash2 />}</li>
+        </ul>
       </div>
     </div>
   );
